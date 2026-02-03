@@ -4,10 +4,12 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/register", async (req, res) => {
-  const mockData = await new User.create({
+router.get("/", async (req, res) => {
+  const mockData = await User.create({
     username: "Laura",
-    password: "LLL",
+    password: "LLLdfsfs",
   });
   return res.json({ data: mockData });
 });
+
+export default router;
