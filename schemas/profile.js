@@ -1,40 +1,37 @@
-import { Schema, model } from 'mongoose';
-
+import { Schema, model } from "mongoose";
 
 const profileSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   about: {
-    type: String, 
-    maxLength: 500
+    type: String,
+    maxlength: 500,
   },
   yearsExperience: {
     type: Number,
-    required: true
+    required: true,
   },
   languages: {
     type: Array,
-    required: true
+    required: true,
   },
   frameworksAndLibraries: {
-    type: Array
+    type: Array,
   },
   email: {
     type: String,
-    required: true
+    required: true,
   },
   phone: {
-    type: Number
+    type: Number,
   },
   links: {
-    type: Array
-  }
+    type: Array,
+  },
 });
 
-
-const Profile = model('Profile', profileSchema);
-
+const Profile = model("Profile", profileSchema);
 
 export default Profile;
