@@ -2,16 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import path from 'path';
-import authRouter from "./routes/auth.js";
+import registerRouter from "./routes/register.js";
 import { fileURLToPath } from "url";
 
 const app = express();
-const port = process.env.PORT || 8000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "pug");
+const port = process.env.PORT;
 
 /* App Configuration */
 const __filename = fileURLToPath(import.meta.url);
@@ -30,7 +25,7 @@ app.get("/home", (req, res) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/register", authRouter);
+app.use("/register", registerRouter);
 
 import profileRouter from "./routes/profiles.js";
 
