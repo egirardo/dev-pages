@@ -11,6 +11,10 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use("/register", authRouter);
 
+import profileRouter from './routes/profiles.js'
+
+app.use('/profiles', profileRouter);
+
 mongoose.connect(process.env.DB_CONNECTION).then(() => {
   console.log("Connected to DB.");
   app.listen(port, () => {
