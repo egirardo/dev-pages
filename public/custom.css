@@ -8,7 +8,7 @@ form {
     width: 100vw;
 }
 
-.languageButtons {
+.preferenceButtons {
     display: flex;
     flex-direction: column;
 }
