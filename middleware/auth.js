@@ -8,8 +8,9 @@ export default function auth(req, res, next) {
   }
 
   try {
-    jwt.verify(token, process.env.SECRET);
-    req.user = user;
+    const decoded = jwt.verify(token, process.env.SECRET);
+    // Decoded is logged in user
+    req.user = decoded;
     next();
   } catch (error) {
     return res.redirect("/login");

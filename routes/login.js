@@ -40,7 +40,6 @@ const loginRouter = router.post("/", async (req, res) => {
         sameSite: isProd ? "strict" : "lax",
         maxAge: jwsExpirySeconds * 1000,
       });
-
       res.redirect("/profile");
     } catch (error) {
       return res.status(400).json({ message: error.message });
