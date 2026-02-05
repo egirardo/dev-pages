@@ -15,17 +15,18 @@ router.post('/', async (req, res) => {
 
     
     const profile = await Profile.create({
-        name: "Johnny Bravo",
-        yearsExperience: 13,
-        languages: ["JS", "Java", "Python", "PHP"],
-        frameworksAndLibraries: ["Laravel", "Flutter"],
-        email: "johnny.bravo@gmail.com",
-        links: ["www.linkedin.com/in/johnnybravo"],
-        about: "An avid developer, ah huh huh",
-        phone: 46702723153
+        name: req.body.name,
+        yearsExperience: req.body.yearsExperience,
+        languages: req.body.languages,
+        frameworksAndLibraries: req.body.frameworksAndLibraries,
+        preferences: req.body.preferences,
+        email: req.body.email,
+        links: req.body.links,
+        about: req.body.about,
+        phone: req.body.phone
     });
     
-    res.json({ data: profile });
+    res.redirect("/profile");
 
   } catch (e) {
 
