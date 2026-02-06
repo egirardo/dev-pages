@@ -4,7 +4,7 @@ import "dotenv/config";
 import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
-import auth from "./middleware/auth.js";
+import auth, { attachUser } from "./middleware/auth.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -20,6 +20,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(attachUser);
 
 /* Routes Definitions */
 
@@ -31,6 +32,15 @@ app.get("/profile", auth, (req, res) => {
   res.render("profile", {
     title: "Profile",
   });
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/logout", (req, res) => {
+  res.clearCookie('token');
+  res.redirect("/home");
 });
 
 import registerRouter from "./routes/register.js";
