@@ -19,12 +19,22 @@ const userSchema = new Schema({
     maxlength: 100,
   },
 
-  profile: Profile.schema
+  profile: Profile.schema,
 });
 
 function validateUser(user) {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(50).required(),
+    username: Joi.string()
+      .trim()
+      .lowercase()
+      .pattern(/^[a-z0-9_-]+$/) // Only lowercase letters, numbers, underscore, hyphen
+      .min(3)
+      .max(50)
+      .required()
+      .messages({
+        "string.pattern.base":
+          "Username can only contain letters, numbers, underscores and hyphens",
+      }),
     password: Joi.string().min(8).max(100).required(),
   });
   return schema.validate(user);
