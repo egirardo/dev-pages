@@ -79,7 +79,16 @@ function validateProfile(profile) {
       "any.required": "Email is required.",
     }),
 
-    phone: Joi.string().trim().allow("", null).optional(),
+    phone: Joi.string()
+      .trim()
+      .pattern(/^\d{9}$/) // 0-9 digits
+      .length(9)
+      .allow("", null)
+      .optional()
+      .messages({
+        "string.pattern.base": "Phone number must be exactly 9 digits.",
+        "string.length": "Phone number must be exactly 9 digits.",
+      }),
   });
 
   return schema.validate(profile);
