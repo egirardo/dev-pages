@@ -55,10 +55,16 @@ form {
 .col-md-6 {
   width: 40%;
 }
+
 .formContainer {
   display: flex;
-  justify-content: center;
-  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.formContainer .alert {
+  margin: 2em 0;
 }
 
 .preferenceButtons {
