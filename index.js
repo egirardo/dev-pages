@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser";
 import auth, { attachUser } from "./middleware/auth.js";
+import { User } from "./schemas/user.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -28,10 +29,20 @@ app.get("/", (req, res) => {
   res.render("index", { title: "Home" });
 });
 
-app.get("/profile", auth, (req, res) => {
-  res.render("profile", {
-    title: "Profile",
-  });
+app.get("/profile", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    res.render("profile", {
+      title: "Profile",
+      userProfile: user?.profile || null, // Pass existing profile or null
+    });
+  } catch (error) {
+    res.render("profile", {
+      title: "Profile",
+      error: "Error loading profile",
+    });
+  }
 });
 
 app.get("/login", (req, res) => {
@@ -40,7 +51,7 @@ app.get("/login", (req, res) => {
 
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
-  res.redirect("/home");
+  res.render("index", { alert: "You have been logged out!" });
 });
 
 import registerRouter from "./routes/register.js";
