@@ -4,6 +4,7 @@ import { error } from "console";
 import auth from "../middleware/auth.js";
 import { User } from "../schemas/user.js";
 import { prepareProfileData } from "../utility/formHelpers.js";
+import { render } from "pug";
 
 /** @type {import('mongoose').Model<any>} */
 const Profile = ProfileModel;
@@ -22,20 +23,21 @@ router.post("/", auth, async (req, res) => {
         error: "Something went wrong, please log in again.",
       });
     }
+
     // Prep data to handle string as arrays
     const profileData = prepareProfileData(req.body);
 
     const { error } = validateProfile(profileData);
 
     if (error) {
-      return res
-        .status(400)
-        .render("profile", { error: error.details[0].message });
+      return res.status(400).render("profile", {
+        error: error.details[0].message,
+        userProfile: user.profile,
+      });
     }
 
     user.profile = profileData;
     user.markModified("profile");
-
     await user.save();
 
     res.redirect("profile", {
