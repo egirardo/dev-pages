@@ -1,16 +1,16 @@
 nav.navbar.navbar-expand-lg.bg-primary(data-bs-theme="light")
     div.container-fluid
-        a.navbar-brand(href="/home") DevPages
+        a.navbar-brand(href="/") DevPages
         button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation")
             span.navbar-toggler-icon 
         div.collapse.navbar-collapse(id="navbarColor01")
             ul.navbar-nav.me-auto 
                 li.nav-item
-                    a.nav-link(href="/home") Home
+                    a.nav-link(href="/") Home
                 li.nav-item
                     a.nav-link(href="/collection") Browse
             if user
-                a.btn.btn-secondary.my-2.my-sm-0(href="/profiles/me") My Profile
+                a.btn.btn-secondary.my-2.my-sm-0(href="/profile") My Profile
                 a.btn.btn-secondary.my-2.my-sm-0(href="/logout") Logout
             else
                 a.btn.btn-secondary.my-2.my-sm-0(href="/login") Login
