@@ -11,23 +11,30 @@ block layout-content
                 button.accordion-button.collapsed(type="button" data-bs-toggle="collapse" data-bs-target="#collapseProfile" aria-expanded="false" aria-controls="collapseProfile")= `${userProfile.name} | ${userProfile.yearsExperience} years Experience | ${userProfile.languages.join(', ')}`
             div.accordion-collapse.collapse(id="collapseProfile" aria-labelledby="headingProfile" data-bs-parent="#devs-container")
                 div.accordion-body
-                    strong About Developer: 
-                    = userProfile.about || 'N/A'
-                    br
-                    strong Frameworks/Libraries: 
-                    = userProfile.frameworksAndLibraries && userProfile.frameworksAndLibraries.length > 0 ? userProfile.frameworksAndLibraries.join(', ') : 'N/A'
-                    br
-                    strong Preferences: 
-                    = userProfile.preferences && userProfile.preferences.length > 0 ? userProfile.preferences.join(', ') : 'N/A'
-                    br
-                    strong Links: 
-                    = userProfile.links && userProfile.links.length > 0 ? userProfile.links.join(', ') : 'Not provided'
-                    br
-                    strong Email: 
-                    = userProfile.email || 'Not provided'
-                    br
-                    strong Phone: 
-                    = userProfile.phone || 'Not provided'
+                    if userProfile.about
+                        strong About Developer: 
+                        = userProfile.about
+                        br
+                    if userProfile.frameworksAndLibraries && userProfile.frameworksAndLibraries.length > 0
+                        strong Frameworks/Libraries: 
+                        = userProfile.frameworksAndLibraries.join(', ')
+                        br
+                    if userProfile.preferences && userProfile.preferences.length > 0
+                        strong Preferences: 
+                        = userProfile.preferences.join(', ')
+                        br
+                    if userProfile.links && userProfile.links.length > 0
+                        strong Links: 
+                        = userProfile.links.join(', ')
+                        br
+                    if userProfile.email
+                        strong Email: 
+                        = userProfile.email
+                        br
+                    if userProfile.phone
+                        strong Phone: 
+                        = userProfile.phone
+                        br
     div.formContainer
         if error
             div.alert.alert-dismissible.alert-danger

@@ -40,8 +40,9 @@ router.post("/", auth, async (req, res) => {
     user.markModified("profile");
     await user.save();
 
-    res.redirect("profile", {
+    res.render("profile", {
       alert: "Your profile has been sucessfully saved!",
+      userProfile: user.profile,
     });
   } catch (e) {
     res.status(400).render("profile", { error: e.message });
