@@ -14,6 +14,12 @@ body {
   flex-direction: column;
 }
 
+.phone-grid {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  gap: 0.5em;
+}
+
 .main-section {
   padding: 2em;
   text-align: center;
@@ -168,7 +174,7 @@ form {
 }
 
 footer {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .developers {

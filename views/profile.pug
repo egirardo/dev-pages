@@ -84,7 +84,6 @@ block layout-content
                             )
                             label.form-check-label(for=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`)= language
                             
-
             div
                 label.form-label.mt-4 Frameworks/Libraries
                 div.checkbox-container
@@ -115,7 +114,9 @@ block layout-content
 
             div
                 label.form-label.mt-4(for="phone") Phone
-                input.form-control(type="tel", id="phone", name="phone", placeholder="Enter your phone number", value=form.phone)
+                div.phone-grid
+                    span.input-group-text +46
+                    input.form-control(type="tel", id="phone", name="phone", placeholder="Enter your phone number", value=form.phone)
                 p.tool-tip * Must be 9 digits. Can't start with 0.
             div
                 label.form-label.mt-4(for="github") Github Link
