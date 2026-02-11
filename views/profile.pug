@@ -33,8 +33,12 @@ block layout-content
                         p= userProfile.preferences.join(', ')
 
                     if userProfile.links && userProfile.links.length > 0
-                        strong.card-title Links: 
-                        p= userProfile.links.join(', ')
+                    strong.card-title Links:
+                    ul
+                        each link in userProfile.links
+                            if link && link.trim()
+                                li
+                                    a(href=link)= link
 
                     if userProfile.email
                         strong.card-title Email: 

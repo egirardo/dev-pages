@@ -20,6 +20,11 @@ block layout-content
                       p 
                         strong About Developer: 
                         = user.profile.about
+
+                    if user.profile.languages && user.profile.languages.length > 0
+                        strong.card-title Languages: 
+                        p= user.profile.languages.join(', ')
+
                     if user.profile.frameworksAndLibraries && user.profile.frameworksAndLibraries.length > 0
                       p
                         strong Frameworks/Libraries: 
@@ -88,11 +93,11 @@ block layout-content
             div.preferenceButtons
                 label.form-label.mt-4 Preferences
                 div.btn-group(role="group", aria-label="preference toggle button group")
-                    input.btn-check(type="checkbox", id="frontendFilter", name="preferences", value="frontendFilter", autocomplete="off")
+                    input.btn-check(type="checkbox", id="frontendFilter", name="preferences", value="Frontend", autocomplete="off")
                     label.btn.btn-primary(for="frontendFilter") Frontend
-                    input.btn-check(type="checkbox", id="backendFilter", name="preferences", value="backendFilter", autocomplete="off")
+                    input.btn-check(type="checkbox", id="backendFilter", name="preferences", value="Backend", autocomplete="off")
                     label.btn.btn-primary(for="backendFilter") Backend
-                    input.btn-check(type="checkbox", id="full-stackFilter", name="preferences", value="full-stackFilter", autocomplete="off")
+                    input.btn-check(type="checkbox", id="full-stackFilter", name="preferences", value="Full-stack", autocomplete="off")
                     label.btn.btn-primary(for="full-stackFilter") Full-Stack
             div.mt-3.filter-btn
               button.btn.btn-secondary(type="button" id="resetFilters") Reset Filters
