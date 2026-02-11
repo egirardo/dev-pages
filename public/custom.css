@@ -4,7 +4,11 @@ body,
 .container {
   height: 100%;
 }
-
+.browse-title {
+  text-align: center;
+  padding-top: 1em;
+  margin-bottom: 2em;
+}
 body {
   display: flex;
   flex-direction: column;
@@ -152,7 +156,9 @@ h1 {
   width: 40vw;
   margin-top: 0.25rem;
 }
-
+.developers .accordion-container .accordion {
+  margin-top: 2em;
+}
 /* Remove default first/last child styling */
 .accordion-item:first-child {
   border-top-left-radius: 0 !important;
