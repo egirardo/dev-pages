@@ -4,6 +4,12 @@ block layout-content
 
     include header 
 
+    if error
+        div.alert.alert-dismissible.alert-danger
+            p #{error}
+    if alert 
+        div.alert.alert-dismissible.alert-success
+            p #{alert}
     if userProfile
         section.profile-section
             h1 Your current profile
@@ -35,12 +41,6 @@ block layout-content
 
     div.formContainer
         h2 Edit your profile
-        if error
-            div.alert.alert-dismissible.alert-danger
-                p #{error}
-        if alert 
-            div.alert.alert-dismissible.alert-success
-                p #{alert}
         form(action="/profiles" method="post")
             div
                 label.form-label.mt-4(for="name") Name *
