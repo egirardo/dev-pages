@@ -89,6 +89,7 @@ form {
 
 .col-md-6 {
   width: 40%;
+  align-self: flex-start;
 }
 
 .formContainer,
