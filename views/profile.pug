@@ -72,7 +72,6 @@ block layout-content
                                 name='languages' 
                                 value=language 
                                 id=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`
-                                required
                             )
                             label.form-check-label(for=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`)= language
                             
@@ -84,7 +83,7 @@ block layout-content
                         div.form-check
                             input.form-check-input(
                                 type='checkbox' 
-                                name='frameworks' 
+                                name='frameworksAndLibraries' 
                                 value=framework 
                                 id=`framework-${framework.toLowerCase().replace(/[^a-z0-9]/g, '')}`
                             )
