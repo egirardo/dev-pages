@@ -45,14 +45,14 @@ block layout-content
         form(action="/profiles" method="post")
             div
                 label.form-label.mt-4(for="name") Name*
-                input.form-control(type="text", id="name", name="name", placeholder="Enter your full name")
+                input.form-control(type="text", id="name", name="name", placeholder="Enter your full name" required)
                 small.form-text.text-muted(id="reqText") Required Field
             div
                 label.form-label.mt-4(for="about") About Yourself
                 textarea.form-control(type="text", id="about", name="about" placeholder="Tell us a little more about yourself", rows="3", style="height: 61px;")
             div
                 label.form-label.mt-4(for="yearsExperience") Years Experience*
-                input.form-control(type="number", id="yearsExperience", name="yearsExperience", placeholder="How many years of experience do you have?")
+                input.form-control(type="number", id="yearsExperience", name="yearsExperience", placeholder="How many years of experience do you have?" required)
                 small.form-text.text-muted(id="reqText") Required Field (Whole Numbers Only)
             div
                 div.language-title
@@ -105,7 +105,7 @@ block layout-content
             
             div
                 label.form-label.mt-4(for="email") Email address*
-                input.form-control(type="email", id="email", name="email", placeholder="Enter email")
+                input.form-control(type="email", id="email", name="email", placeholder="Enter email" required)
                 small.form-text.text-muted(id="reqText") Required Field
             div
                 label.form-label.mt-4(for="phone") Phone
@@ -114,11 +114,11 @@ block layout-content
                 label.mt-4 Additional Links
                 div
                     label.form-label.mt-4(for="github") Github
-                    input.form-control(type="text", id="github", name="links", placeholder="Github Link")
+                    input.form-control(type="url", id="github", name="links", placeholder="Github Link")
                     label.form-label.mt-4(for="linkedIn") LinkedIn
-                    input.form-control(type="text", id="linkedIn", name="links", placeholder="LinkedIn Link")
+                    input.form-control(type="url", id="linkedIn", name="links", placeholder="LinkedIn Link")
                     label.form-label.mt-4(for="otherLink") Other
-                    input.form-control(type="text", id="otherLink", name="links", placeholder="Additional Link")
+                    input.form-control(type="url", id="otherLink", name="links", placeholder="Additional Link")
             div.buttonContainer
                 button.btn.btn-primary(type="submit") Submit
 
