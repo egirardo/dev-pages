@@ -5,13 +5,12 @@ import auth from "../middleware/auth.js";
 import { User } from "../schemas/user.js";
 import { prepareProfileData } from "../utility/formHelpers.js";
 import { render } from "pug";
-import frameworks from '../config/frameworks.js';
-import languages from '../config/languages.js';
+import frameworks from "../config/frameworks.js";
+import languages from "../config/languages.js";
 /** @type {import('mongoose').Model<any>} */
 const Profile = ProfileModel;
 
 const router = express.Router();
-
 
 router.post("/", auth, async (req, res) => {
   try {
@@ -36,7 +35,8 @@ router.post("/", auth, async (req, res) => {
         error: error.details[0].message,
         userProfile: user.profile,
         languages: languages,
-        frameworks: frameworks,    
+        frameworks: frameworks,
+        form: req.body,
       });
     }
 
@@ -51,11 +51,12 @@ router.post("/", auth, async (req, res) => {
       frameworks: frameworks,
     });
   } catch (e) {
-    res.status(400).render("profile", { 
-        error: e.message,
-        languages: languages,
-        frameworks: frameworks,
-     });
+    res.status(400).render("profile", {
+      error: e.message,
+      languages: languages,
+      frameworks: frameworks,
+      form: req.body,
+    });
   }
 });
 
@@ -68,12 +69,14 @@ router.get("/", auth, async (req, res) => {
       userProfile: user?.profile || null,
       languages: languages,
       frameworks: frameworks,
+      form: req.body,
     });
   } catch (error) {
-    res.status(500).render("profile", { 
+    res.status(500).render("profile", {
       error: error.message,
       languages: languages,
       frameworks: frameworks,
+      form: req.body,
     });
   }
 });

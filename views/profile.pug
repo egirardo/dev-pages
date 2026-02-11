@@ -2,6 +2,8 @@ extends layout
 
 block layout-content 
 
+    - form = form || {}
+
     include header 
 
     if error
@@ -33,12 +35,12 @@ block layout-content
                         p= userProfile.preferences.join(', ')
 
                     if userProfile.links && userProfile.links.length > 0
-                    strong.card-title Links:
-                    ul
-                        each link in userProfile.links
-                            if link && link.trim()
-                                li
-                                    a(href=link)= link
+                        strong.card-title Links:
+                        ul
+                            each link in userProfile.links
+                                if link && link.trim()
+                                    li
+                                        a(href=link)= link
 
                     if userProfile.email
                         strong.card-title Email: 
@@ -53,17 +55,17 @@ block layout-content
         form(action="/profiles" method="post")
             div
                 label.form-label.mt-4(for="name") Name *
-                input.form-control(type="text", id="name", name="name", placeholder="Enter your full name" required)
+                input.form-control(type="text", id="name", name="name", placeholder="Enter your full name", value=form.name)
                 small.form-text.text-muted(id="reqText") Required Field
 
             div
                 label.form-label.mt-4(for="email") Email address *
-                input.form-control(type="email", id="email", name="email", placeholder="Enter email" required)
+                input.form-control(type="email", id="email", name="email", placeholder="Enter email", value=form.email)
                 small.form-text.text-muted(id="reqText") Required Field
                 
             div
                 label.form-label.mt-4(for="yearsExperience") Years Experience *
-                input.form-control(type="number", id="yearsExperience", name="yearsExperience", placeholder="How many years of experience do you have?" required)
+                input.form-control(type="number", id="yearsExperience", name="yearsExperience", placeholder="How many years of experience do you have?", value=form.yearsExperience)
                 small.form-text.text-muted(id="reqText") Required Field (Whole Numbers Only)
 
             div
@@ -74,10 +76,11 @@ block layout-content
                     each language in languages
                         div.form-check
                             input.form-check-input(
-                                type='checkbox' 
-                                name='languages' 
-                                value=language 
-                                id=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`
+                                type='checkbox',
+                                name='languages',
+                                value=language,
+                                id=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
+                                checked=form.languages && form.languages.includes(language)
                             )
                             label.form-check-label(for=`lang-${language.toLowerCase().replace(/[^a-z0-9]/g, '')}`)= language
                             
@@ -88,38 +91,39 @@ block layout-content
                     each framework in frameworks
                         div.form-check
                             input.form-check-input(
-                                type='checkbox' 
-                                name='frameworksAndLibraries' 
-                                value=framework 
-                                id=`framework-${framework.toLowerCase().replace(/[^a-z0-9]/g, '')}`
+                                type='checkbox',
+                                name='frameworksAndLibraries',
+                                value=framework, 
+                                id=`framework-${framework.toLowerCase().replace(/[^a-z0-9]/g, '')}`,
+                                checked=form.frameworksAndLibraries && form.frameworksAndLibraries.includes(framework)
                             )
                             label.form-check-label(for=`framework-${framework.toLowerCase().replace(/[^a-z0-9]/g, '')}`)= framework
             
             div.preferenceButtons
                 label.form-label.mt-4 Preferences
                 div.btn-group(role="group", aria-label="preference toggle button group")
-                    input.btn-check(type="checkbox", id="frontend", name="preferences", value="Frontend", autocomplete="off")
+                    input.btn-check(type="checkbox", id="frontend", name="preferences", value="Frontend", autocomplete="off", checked=form.preferences && form.preferences.includes("Frontend"))
                     label.btn.btn-primary(for="frontend") Frontend
-                    input.btn-check(type="checkbox", id="backend", name="preferences", value="Backend", autocomplete="off")
+                    input.btn-check(type="checkbox", id="backend", name="preferences", value="Backend", autocomplete="off", checked=form.preferences && form.preferences.includes("Backend"))
                     label.btn.btn-primary(for="backend") Backend
-                    input.btn-check(type="checkbox", id="full-stack", name="preferences", value="Full-stack", autocomplete="off")
+                    input.btn-check(type="checkbox", id="full-stack", name="preferences", value="Full-stack", autocomplete="off", checked=form.preferences && form.preferences.includes("Full-stack"))
                     label.btn.btn-primary(for="full-stack") Full-Stack
             
             div
                 label.form-label.mt-4(for="about") About Yourself
-                textarea.form-control(type="text", id="about", name="about" placeholder="Tell us a little more about yourself", rows="3", style="height: 61px;")
+                textarea.form-control(type="text", id="about", name="about" placeholder="Tell us a little more about yourself", rows="3", style="height: 61px;",)= form.about
 
             div
                 label.form-label.mt-4(for="phone") Phone
-                input.form-control(type="tel", id="phone", name="phone", placeholder="Enter your phone number")
+                input.form-control(type="tel", id="phone", name="phone", placeholder="Enter your phone number", value=form.phone)
                 p.tool-tip * Must be 9 digits. Can't start with 0.
             div
                 label.form-label.mt-4(for="github") Github Link
-                input.form-control(type="url", id="github", name="links", placeholder="Github Link")
+                input.form-control(type="url", id="github", name="links", placeholder="Github Link", value=form.links && form.links[0])
                 label.form-label.mt-4(for="linkedIn") LinkedIn Link
-                input.form-control(type="url", id="linkedIn", name="links", placeholder="LinkedIn Link")
+                input.form-control(type="url", id="linkedIn", name="links", placeholder="LinkedIn Link", value=form.links && form.links[1])
                 label.form-label.mt-4(for="otherLink") Other Link
-                input.form-control(type="url", id="otherLink", name="links", placeholder="Additional Link")
+                input.form-control(type="url", id="otherLink", name="links", placeholder="Additional Link", value=form.links && form.links[2])
         
             div.buttonContainer
                 button.btn.btn-primary(type="submit") Submit
