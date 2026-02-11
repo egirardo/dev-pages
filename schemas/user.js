@@ -41,7 +41,7 @@ function validateUser(user) {
         "any.required": "Username is required.",
       }),
     password: Joi.string()
-      .pattern(/^[a-z0-9_-]+$/)
+      .pattern(/^[a-zA-Z0-9_!@#$%^&*-]+$/)
       .min(8)
       .max(100)
       .required()
