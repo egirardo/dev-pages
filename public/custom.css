@@ -4,14 +4,25 @@ body,
 .container {
   height: 100%;
 }
+
 .browse-title {
   text-align: center;
   padding-top: 1em;
   margin-bottom: 2em;
 }
+
+main {
+  flex: 1;
+}
+
 body {
   display: flex;
   flex-direction: column;
+}
+.phone-grid {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  gap: 0.5em;
 }
 
 .dev-tip {
@@ -173,7 +184,7 @@ form {
 }
 
 footer {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .developers {

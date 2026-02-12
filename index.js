@@ -40,6 +40,7 @@ app.get("/profile", auth, async (req, res) => {
       userProfile: user.profile,
       languages: languages,
       frameworks: frameworks,
+      form: {},
     });
   } catch (error) {
     res.render("profile", {

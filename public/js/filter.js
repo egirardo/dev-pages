@@ -10,6 +10,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     form.addEventListener('change', filterProfiles);
     form.addEventListener('input', filterProfiles);
+
+    /**
+     * Helper: find the text content of the <p> or inline text that follows
+     * a <strong> whose text starts with the given label inside a container.
+     */
+    function getFieldText(container, label) {
+        const strongs = container.querySelectorAll('strong');
+        for (const strong of strongs) {
+            if (strong.textContent.trim().startsWith(label)) {
+                // If the strong is inside a <p>, return that <p>'s full text
+                const parentP = strong.closest('p');
+                if (parentP) {
+                    return parentP.textContent.toLowerCase();
+                }
+                // If the strong is a standalone element (e.g. strong.card-title),
+                // grab the next sibling <p>
+                let next = strong.nextElementSibling;
+                if (next && next.tagName === 'P') {
+                    return next.textContent.toLowerCase();
+                }
+            }
+        }
+        return '';
+    }
     
     function filterProfiles() {
         const minYears = parseInt(document.getElementById('yearsExperienceFilter').value) || 0;
@@ -25,18 +49,18 @@ document.addEventListener('DOMContentLoaded', function() {
             const body = item.querySelector('.accordion-body');
             const buttonText = button.textContent;
             
-            // Extract years experience from button text - using regex because the data is being pulled from the button on the page
+            // Extract years experience from button text
             const yearsMatch = buttonText.match(/(\d+)\s+years Experience/);
             const years = yearsMatch ? parseInt(yearsMatch[1]) : 0;
             
-            // Extract languages from button text (after the last |) - using regex because the data is being pulled from the button on the page
-            const languagesText = buttonText.split('|').pop().trim().toLowerCase();
+            // Extract preferences from button text (after the last |)
+            const preferencesText = buttonText.split('|').pop().trim().toLowerCase();
+
+            // Extract languages from accordion body (using the "Languages:" label)
+            const languagesText = getFieldText(body, 'Languages');
             
-            // Extract frameworks from accordion body
-            const frameworksText = body.querySelector('p:nth-of-type(2)')?.textContent.toLowerCase() || '';
-            
-            // Extract preferences from accordion body
-            const preferencesText = body.querySelector('p:nth-of-type(3)')?.textContent.toLowerCase() || '';
+            // Extract frameworks from accordion body (using the "Frameworks" label)
+            const frameworksText = getFieldText(body, 'Frameworks');
             
             // Check if item matches filters
             let matches = true;
@@ -63,15 +87,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Preferences check (must have at least ONE selected preference)
+            // Frontend and Backend filters also match Full-stack developers
             if (selectedPreferences.length > 0) {
-                const prefMap = {
-                    'frontendFilter': 'frontend',
-                    'backendFilter': 'backend',
-                    'full-stackFilter': 'full-stack'
-                };
-                const hasAnyPref = selectedPreferences.some(pref => 
-                    preferencesText.includes(prefMap[pref])
-                );
+                const isFullStack = preferencesText.includes('full-stack');
+                const hasAnyPref = selectedPreferences.some(pref => {
+                    const lowerPref = pref.toLowerCase();
+                    if ((lowerPref === 'frontend' || lowerPref === 'backend') && isFullStack) {
+                        return true;
+                    }
+                    return preferencesText.includes(lowerPref);
+                });
                 if (!hasAnyPref) matches = false;
             }
             
