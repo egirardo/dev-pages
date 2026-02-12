@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../schemas/user.js";
+import frameworks from "../config/frameworks.js";
+import languages from "../config/languages.js";
 
 // middleware to attach user to cookie
 export const attachUser = async (req, res, next) => {
