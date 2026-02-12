@@ -25,6 +25,11 @@ body {
   gap: 0.5em;
 }
 
+.dev-tip {
+    margin-top: 1rem;
+    margin-right: .5rem;
+}
+
 .main-section {
   padding: 2em;
   text-align: center;
