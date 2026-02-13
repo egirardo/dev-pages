@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Frameworks check (must have ALL selected frameworks)
             if (selectedFrameworks.length > 0) {
-                const hasAllFrameworks = selectedFrameworks.some(fw =>
+                const hasAllFrameworks = selectedFrameworks.every(fw =>
                     containsExactToken(frameworksText, fw)
                 );
                 if (!hasAllFrameworks) matches = false;
